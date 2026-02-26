@@ -51,7 +51,3 @@ export async function POST(request: NextRequest){
     }
 }
 
-
-// this in empty and export another file
-
-
