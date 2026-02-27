@@ -24,5 +24,3 @@ export async function connect() {
 }
 
 
-// mongodb connectin in uri 
-// uri and databse check error 
