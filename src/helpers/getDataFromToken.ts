@@ -11,4 +11,3 @@ export const getDataFromToken = (request:NextRequest)=>{
     }
 }
 
-
