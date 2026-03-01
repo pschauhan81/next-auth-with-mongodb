@@ -1,5 +1,15 @@
-// this route me  router
+import {connect} from "@/dbConfig/dbConfig";
+import User from "@/models/userModel";
+import { NextRequest, NextResponse } from "next/server";
+import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken"
+import { getDataFromToken } from "@/helpers/getDataFromToken";
 
-// how to route erro solve it
+connect()
 
+export async function POST(request: NextRequest){
+    // extract data from token 
+    const userId = await getDataFromToken(request)
+    User.findOne()
+}
 
