@@ -3,7 +3,9 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 
+
 connect()
+
 
 export async function POST(request: NextRequest){
     // extract data from token 
@@ -15,4 +17,6 @@ export async function POST(request: NextRequest){
         data:user 
     })
 }
+
+
 
