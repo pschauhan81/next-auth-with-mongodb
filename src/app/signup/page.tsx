@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 
-export default function SignuPage() {
+export default function SignupPage() {
   const router = useRouter()
   const [user, setUser] = useState({
     email:"",
