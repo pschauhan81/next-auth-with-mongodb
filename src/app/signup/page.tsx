@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
+import axios from "axios"
+import {toast} from "react-hot-toast"
+import { useRouter } from 'next/navigation'
+
 
 export default function SignuPage() {
-
+  const router = useRouter()
   const [user, setUser] = useState({
     email:"",
     password:"",
@@ -9,12 +14,64 @@ export default function SignuPage() {
   })
 
   const [buttonDisabled, setButtonDisabled] = useState(false)
-  const [loading, setLoding] = useState(false)
+  const [loading, setLoading] = useState(false)
 
+  const onSignup = async() => {
+    try {
+      setLoading(true)
+      const response = await axios.post("/api/users/signup", user)
+      console.log("Signup success", response.data);
+      router.push('/login')
+
+
+    } catch (error:any) {
+      console.log("Signup failed ")
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(()=>{
+    if(user.email.length > 0 && user.password.length > 0  && user.username.length > 0){
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setButtonDisabled(false)
+    }else{
+      setButtonDisabled(true)
+    }
+  },[user])
 
   return (
-    <div>
-      Sign up Page 
+    <div className='flex flex-col items-center justify-center min-h-screen py-2 bg-gray-700'>
+      <h1>{loading ? "Processing" : "Signup"}</h1>
+      <hr/>
+
+      <label htmlFor='username'>username</label>
+      <input
+      className='p-2 border border-gary-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black  bg-white'
+       type="text" 
+       value={user.username}
+       onChange={(e)=>setUser({...user, username:e.target.value})}
+       placeholder=" Username" 
+       />
+
+      <label htmlFor='username'>Email</label>
+      <input
+      className='p-2 border border-gary-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black bg-white'
+       type="text" 
+       value={user.email}
+       onChange={(e)=>setUser({...user, email:e.target.value})}
+       placeholder="Email" 
+       />
+
+      <label htmlFor='username'>Password</label>
+      <input
+      className='p-2 border border-gary-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black  bg-white'
+       type="text" 
+       value={user.password}
+       onChange={(e)=>setUser({...user, password:e.target.value})}
+       placeholder="Password" 
+       />
+
+
     </div>
   )
 }
