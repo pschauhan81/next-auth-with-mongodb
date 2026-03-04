@@ -14,6 +14,8 @@ export default function ProfilePage() {
         setData(res.data._id)
     }
 
+    
+
   return (
     <div>
       
